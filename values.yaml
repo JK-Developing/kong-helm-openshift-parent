@@ -1,0 +1,26 @@
+openshift:
+  routes:
+    manager:
+      enabled: false
+      tls:
+        enabled: true
+        termination: edge
+    admin:
+      enabled: false
+      tls:
+        enabled: true
+        termination: edge
+    portal:
+      enabled: false
+      tls:
+        enabled: true
+        termination: edge
+    portalapi:
+      enabled: false
+      tls:
+        enabled: true
+        termination: edge
+    clustertelemetry:
+      enabled: false
+    cluster:
+      enabled: false
