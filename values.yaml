@@ -1,25 +1,30 @@
 openshift:
   routes:
+    proxy:
+      enabled: true
+      tls:
+        enabled: true
+        termination: passthrough
     manager:
       enabled: false
       tls:
         enabled: true
-        termination: edge
+        termination: passthrough
     admin:
       enabled: false
       tls:
         enabled: true
-        termination: edge
+        termination: passthrough
     portal:
       enabled: false
       tls:
         enabled: true
-        termination: edge
+        termination: passthrough
     portalapi:
       enabled: false
       tls:
         enabled: true
-        termination: edge
+        termination: passthrough
     clustertelemetry:
       enabled: false
     cluster:

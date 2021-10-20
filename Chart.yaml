@@ -7,9 +7,9 @@ maintainers:
 - name: ttys0e
   email: jack.tysoe@konghq.com
 name: kong-oshift
-version: 1.0.0
-appVersion: 2.6.0
+version: 1.0.3-devel
+appVersion: 2.8.1
 dependencies:
 - name: kong
-  version: 2.5.0  # this is the Kong Enterprise 2.6.0 Helm Chart
+  version: 2.11.0  # this is the Kong Enterprise 2.8.1.x Helm Chart
   repository: https://charts.konghq.com

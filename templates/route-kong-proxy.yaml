@@ -1,0 +1,30 @@
+{{- if .Values.kong.deployment.kong.enabled }}
+{{- if .Values.openshift.routes.proxy.enabled }}
+{{- if and .Values.kong.proxy.enabled (or .Values.kong.proxy.http.enabled .Values.kong.proxy.tls.enabled) -}}
+apiVersion: v1
+kind: Route
+metadata:
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kong
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: {{ .Chart.Name }}
+  name: {{ .Release.Name }}-kong-proxy
+  namespace: {{ .Release.Namespace }}
+spec:
+  host: {{ .Values.openshift.routes.proxy.hostname | default "" | quote }}
+  port:
+    targetPort: {{ if and (.Values.openshift.routes.proxy.tls.enabled) (eq .Values.openshift.routes.proxy.tls.termination "edge") }}"kong-proxy"{{ else }}kong-proxy-tls{{- end }}
+{{- if .Values.openshift.routes.proxy.tls.enabled }}
+  tls:
+    termination: {{ .Values.openshift.routes.proxy.tls.termination | default "passthrough" | quote }}
+{{- end }}
+  to:
+    kind: Service
+    name: {{ .Release.Name }}-kong-proxy
+    weight: 100
+  wildcardPolicy: None
+{{- end -}}
+{{- end -}}
+{{- end -}}
