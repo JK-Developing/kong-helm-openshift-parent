@@ -2,7 +2,11 @@
 {{- if .Values.kong.enterprise.enabled }}
 {{- if .Values.openshift.routes.portal.enabled }}
 {{- if and .Values.kong.portal.enabled (or .Values.kong.portal.http.enabled .Values.kong.portal.tls.enabled) -}}
+{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1/Route"}}
+apiVersion: route.openshift.io/v1
+{{- else }}
 apiVersion: v1
+{{- end }}
 kind: Route
 metadata:
   labels:

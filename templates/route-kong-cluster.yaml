@@ -1,7 +1,11 @@
 {{- if .Values.kong.deployment.kong.enabled }}
 {{- if .Values.openshift.routes.cluster.enabled }}
 {{- if .Values.kong.cluster.enabled -}}
+{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1/Route"}}
+apiVersion: route.openshift.io/v1
+{{- else }}
 apiVersion: v1
+{{- end }}
 kind: Route
 metadata:
   labels:

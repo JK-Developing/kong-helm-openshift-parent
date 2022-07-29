@@ -1,7 +1,11 @@
 {{- if .Values.kong.deployment.kong.enabled }}
 {{- if .Values.openshift.routes.proxy.enabled }}
 {{- if and .Values.kong.proxy.enabled (or .Values.kong.proxy.http.enabled .Values.kong.proxy.tls.enabled) -}}
+{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1/Route"}}
+apiVersion: route.openshift.io/v1
+{{- else }}
 apiVersion: v1
+{{- end }}
 kind: Route
 metadata:
   labels:
