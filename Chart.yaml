@@ -7,7 +7,7 @@ maintainers:
 - name: ttys0e
   email: jack.tysoe@konghq.com
 name: kong-oshift
-version: 1.0.3
+version: 1.0.4-devel
 appVersion: 2.8.1
 dependencies:
 - name: kong
